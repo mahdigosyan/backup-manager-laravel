@@ -58,6 +58,6 @@ trait AutoComplete {
         $question->setValidator($validation);
         $helper = $this->getHelper('question');
 
-        return $helper->ask($this->input, $this->output,);
+        return $helper->ask($this->input, $this->output,$question);
     }
 }
