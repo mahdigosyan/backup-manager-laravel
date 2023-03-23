@@ -47,3 +47,17 @@ trait AutoComplete {
             $this->output, "<question>{$dialog}</question>", $validation, false, $default, $list
         );
     }
+
+     /**
+     * @param $dialog
+     * @param null $default
+     * @return mixed
+     */
+    protected function useSymfonyQuestion($dialog, $default = null, $validation) {
+        $question = new Question($dialog . ' ', $default);
+        $question->setValidator($validation);
+        $helper = $this->getHelper('question');
+
+        return $helper->ask($this->input, $this->output,);
+    }
+}
