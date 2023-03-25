@@ -229,3 +229,14 @@ class DbBackupCommand extends Command {
      * @return array
      */
 
+     protected function getOptions() {
+        return [
+            ['database', null, InputOption::VALUE_OPTIONAL, 'Database configuration name', null],
+            ['destination', null, InputOption::VALUE_OPTIONAL, 'Destination configuration name', null],
+            ['destinationPath', null, InputOption::VALUE_OPTIONAL, 'File destination path', null],
+            ['compression', null, InputOption::VALUE_OPTIONAL, 'Compression type', null],
+            ['timestamp', null, InputOption::VALUE_OPTIONAL, 'Append timestamp to filename',],
+        ];
+    }
+}
+
