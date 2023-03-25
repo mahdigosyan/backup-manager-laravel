@@ -188,3 +188,11 @@ class DbBackupCommand extends Command {
         $compression = $this->autocomplete('Which compression type you want to use?', $types);
         $this->input->setOption('compression', $compression);
     }
+
+     /**
+     * @throws \BackupManager\Config\ConfigFieldNotFound
+     * @throws \BackupManager\Config\ConfigNotFoundForConnection
+     * @return void
+     */
+
+     
