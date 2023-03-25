@@ -201,7 +201,7 @@ class DbBackupCommand extends Command {
         $this->info(sprintf('Do you want to create a backup of <comment>%s</comment>, store it on <comment>%s</comment> at <comment>%s</comment> and compress it to <comment>%s</comment>?',
             $this->option('database'),
             $this->option('destination'),
-            $root . $this->option('destinationPath') . $this->,
+            $root . $this->option('destinationPath') . $this->timestamp,
             $this->option('compression')
         ));
         $this->line('');
