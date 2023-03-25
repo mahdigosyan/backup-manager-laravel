@@ -216,5 +216,10 @@ class DbBackupCommand extends Command {
      *
      * @return void
      */
-    
+    private function reaskArguments() {
+        $this->line('');
+        $this->info('Answers have been reset and re-asking questions.');
+        $this->line('');
+        $this->promptForMissingArgumentValues();
+    }
 
