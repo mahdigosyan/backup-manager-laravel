@@ -223,3 +223,9 @@ class DbBackupCommand extends Command {
         $this->promptForMissingArgumentValues();
     }
 
+     /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+
