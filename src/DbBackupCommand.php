@@ -235,7 +235,7 @@ class DbBackupCommand extends Command {
             ['destination', null, InputOption::VALUE_OPTIONAL, 'Destination configuration name', null],
             ['destinationPath', null, InputOption::VALUE_OPTIONAL, 'File destination path', null],
             ['compression', null, InputOption::VALUE_OPTIONAL, 'Compression type', null],
-            ['timestamp', null, InputOption::VALUE_OPTIONAL, 'Append timestamp to filename',],
+            ['timestamp', null, InputOption::VALUE_OPTIONAL, 'Append timestamp to filename',null],
         ];
     }
 }
