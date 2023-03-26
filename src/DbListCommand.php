@@ -92,4 +92,26 @@ class DbListCommand extends Command {
         }
         return isset($this->missingArguments);
     }
+    /**
+     * @return void
+     */
+    private function displayMissingArguments() {
+        $formatted = implode(', ', $this->missingArguments);
+        $this->info("These arguments haven't been filled yet: <comment>{$formatted}</comment>.");
+        $this->info('The following questions will fill these in for you.');
+        $this->line('');
+    }
+    /**
+     * @return void
+     */
+    private function promptForMissingArgumentValues() {
+        foreach ($this->missingArguments as $argument) {
+            if ($argument == 'source') {
+                $this->askSource();
+            } elseif ($argument == 'path') {
+                $this->askPath();
+            }
+            $this->line('');
+        }
+    }
     
