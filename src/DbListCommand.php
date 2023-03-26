@@ -185,4 +185,28 @@ class DbListCommand extends Command {
         $this->line('');
         $this->promptForMissingArgumentValues();
     }
-    
+     /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions() {
+        return [
+            ['source', null, InputOption::VALUE_OPTIONAL, 'Source configuration name', null],
+            ['path', null, InputOption::VALUE_OPTIONAL, 'Directory path'],
+        ];
+    }
+
+    /**
+     * @param $bytes
+     * @param int $precision
+     * @return string
+     */
+    private function formatBytes($bytes, $precision = 2) {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+} 
