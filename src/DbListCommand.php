@@ -15,3 +15,10 @@ class DbListCommand extends Command {
      *
      * @var string
      */
+    protected $name = 'db:list';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
