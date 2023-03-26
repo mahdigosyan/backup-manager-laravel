@@ -7,3 +7,11 @@ use BackupManager\Filesystems\FilesystemProvider;
  * Class DbListCommand
  * @package BackupManager\Laravel
  */
+class DbListCommand extends Command {
+    use AutoComplete;
+
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
