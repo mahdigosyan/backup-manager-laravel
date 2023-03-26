@@ -193,7 +193,7 @@ class DbListCommand extends Command {
     protected function getOptions() {
         return [
             ['source', null, InputOption::VALUE_OPTIONAL, 'Source configuration name', null],
-            ['path', null, InputOption::VALUE_OPTIONAL, 'Directory path'],
+            ['path', null, InputOption::VALUE_OPTIONAL, 'Directory path',null],
         ];
     }
 
