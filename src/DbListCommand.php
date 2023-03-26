@@ -81,4 +81,15 @@ class DbListCommand extends Command {
         }
         $this->table(['Name', 'Extension', 'Size', 'Created'], $rows);
     }
+    /**
+     * @return bool
+     */
+    private function isMissingArguments() {
+        foreach ($this->required as $argument) {
+            if ( ! $this->option($argument)) {
+                $this->missingArguments[] = $argument;
+            }
+        }
+        return isset($this->missingArguments);
+    }
     
