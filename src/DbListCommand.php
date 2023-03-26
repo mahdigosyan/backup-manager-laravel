@@ -3,3 +3,7 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use BackupManager\Filesystems\FilesystemProvider;
+/**
+ * Class DbListCommand
+ * @package BackupManager\Laravel
+ */
