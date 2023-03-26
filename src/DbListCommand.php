@@ -22,4 +22,31 @@ class DbListCommand extends Command {
      *
      * @var string
      */
-    
+    protected $description = 'List contents of a backup storage destination.';
+    /**
+     * @var \BackupManager\Filesystems\FilesystemProvider
+     */
+    private $filesystems;
+
+    /**
+     * The required arguments.
+     *
+     * @var array
+     */
+    private $required = ['source', 'path'];
+
+    /**
+     * The missing arguments.
+     *
+     * @var array
+     */
+    private $missingArguments;
+
+
+    /**
+     * @param FilesystemProvider $filesystems
+     */
+    public function __construct(FilesystemProvider $filesystems) {
+        parent::__construct();
+        $this->filesystems = $filesystems;
+    }
