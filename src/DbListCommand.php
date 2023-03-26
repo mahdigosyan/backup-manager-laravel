@@ -149,4 +149,40 @@ class DbListCommand extends Command {
             $this->reaskArguments();
         }
     }
+     /**
+     *
+     */
+    private function askPath() {
+        $root = $this->filesystems->getConfig($this->option('source'), 'root');
+        $path = $this->ask("From which path?<comment> {$root}</comment>");
+        $this->input->setOption('path', $path);
+    }
+
+    /**
+     * @return void
+     */
+    private function validateArguments() {
+        $root = $this->filesystems->getConfig($this->option('source'), 'root');
+        $this->info('Just to be sure...');
+        $this->info(sprintf('Do you want to list files from <comment>%s</comment> on <comment>%s</comment>?',
+            $root . $this->option('path'),
+            $this->option('source')
+        ));
+        $this->line('');
+        $confirmation = $this->confirm('Are these correct? [Y/n]');
+        if ( ! $confirmation) {
+            $this->reaskArguments();
+        }
+    }
+    /**
+     * Get the console command options.
+     *
+     * @return void
+     */
+    private function reaskArguments() {
+        $this->line('');
+        $this->info('Answers have been reset and re-asking questions.');
+        $this->line('');
+        $this->promptForMissingArgumentValues();
+    }
     
