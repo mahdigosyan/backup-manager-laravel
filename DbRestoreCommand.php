@@ -50,3 +50,20 @@ class DbRestoreCommand extends Command {
      * @var \BackupManager\Databases\DatabaseProvider
      */
     private $databases;
+
+    /**
+     * @param \BackupManager\Procedures\RestoreProcedure $restore
+     * @param \BackupManager\Filesystems\FilesystemProvider $filesystems
+     * @param \BackupManager\Databases\DatabaseProvider $databases
+     */
+    public function __construct(RestoreProcedure $restore, FilesystemProvider $filesystems, DatabaseProvider $databases) {
+        parent::__construct();
+        $this->restore = $restore;
+        $this->filesystems = $filesystems;
+        $this->databases = $databases;
+    }
+
+    /**
+     *
+     */
+
