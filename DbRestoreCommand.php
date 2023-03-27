@@ -80,5 +80,6 @@ class DbRestoreCommand extends Command {
             $this->option('database'),
             $this->option('compression')
         );
+        
 
 
