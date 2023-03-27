@@ -36,4 +36,12 @@ class DbRestoreCommand extends Command {
      * @var array
      */
     private $missingArguments;
+    /**
+     * @var \BackupManager\Procedures\RestoreProcedure
+     */
+    private $restore;
+
+    /**
+     * @var \BackupManager\Filesystems\FilesystemProvider
+     */
 
