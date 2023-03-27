@@ -88,6 +88,49 @@ class DbRestoreCommand extends Command {
             $this->option('database')
         ));
     }
+    /**
+     * @return bool
+     */
+    private function isMissingArguments() {
+        foreach ($this->required as $argument) {
+            if ( ! $this->option($argument)) {
+                $this->missingArguments[] = $argument;
+            }
+        }
+        return (bool) $this->missingArguments;
+    }
+
+    /**
+     * @return void
+     */
+    private function displayMissingArguments() {
+        $formatted = implode(', ', $this->missingArguments);
+        $this->info("These arguments haven't been filled yet: <comment>{$formatted}</comment>");
+        $this->info('The following questions will fill these in for you.');
+        $this->line('');
+    }
+
+    /**
+     * @return void
+     */
+    private function promptForMissingArgumentValues() {
+        foreach ($this->missingArguments as $argument) {
+            if ($argument == 'source') {
+                $this->askSource();
+            } elseif ($argument == 'sourcePath') {
+                $this->askSourcePath();
+            } elseif ($argument == 'database') {
+                $this->askDatabase();
+            } elseif ($argument == 'compression') {
+                $this->askCompression();
+            }
+            $this->line('');
+        }
+    }
+
+    /**
+     *
+     */
 
 
 
