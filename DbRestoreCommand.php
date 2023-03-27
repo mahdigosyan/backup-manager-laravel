@@ -80,6 +80,14 @@ class DbRestoreCommand extends Command {
             $this->option('database'),
             $this->option('compression')
         );
-        
+        $this->line('');
+        $root = $this->filesystems->getConfig($this->option('source'), 'root');
+        $this->info(sprintf('Successfully restored <comment>%s</comment> from <comment>%s</comment> to database <comment>%s</comment>.',
+            $root . $this->option('sourcePath'),
+            $this->option('source'),
+            $this->option('database')
+        ));
+    }
+
 
 
