@@ -10,3 +10,9 @@ use BackupManager\Filesystems\FilesystemProvider;
  */
 class DbRestoreCommand extends Command {
     use AutoComplete;
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'db:restore';
