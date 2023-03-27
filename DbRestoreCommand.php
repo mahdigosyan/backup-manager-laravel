@@ -16,3 +16,24 @@ class DbRestoreCommand extends Command {
      * @var string
      */
     protected $name = 'db:restore';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Restore a database backup.';
+
+    /**
+     * The required arguments.
+     *
+     * @var array
+     */
+    private $required = ['source', 'sourcePath', 'database', 'compression'];
+
+    /**
+     * The missing arguments.
+     *
+     * @var array
+     */
+    private $missingArguments;
+
