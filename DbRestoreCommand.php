@@ -49,3 +49,4 @@ class DbRestoreCommand extends Command {
     /**
      * @var \BackupManager\Databases\DatabaseProvider
      */
+    private $databases;
