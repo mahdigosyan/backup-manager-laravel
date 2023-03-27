@@ -131,6 +131,58 @@ class DbRestoreCommand extends Command {
     /**
      *
      */
+    private function askSource() {
+        $providers = $this->filesystems->getAvailableProviders();
+        $formatted = implode(', ', $providers);
+        $this->info("Available storage services: <comment>{$formatted}</comment>");
+        $source = $this->autocomplete("From which storage service do you want to choose?", $providers);
+        $this->input->setOption('source', $source);
+    }
+
+    /**
+     *
+     */
+    private function askSourcePath() {
+        // ask path
+        $root = $this->filesystems->getConfig($this->option('source'), 'root');
+        $path = $this->ask("From which path do you want to select?<comment> {$root}</comment>");
+        $this->line('');
+
+        // ask file
+        $filesystem = $this->filesystems->get($this->option('source'));
+        $contents = $filesystem->listContents($path);
+
+        $files = [];
+
+        foreach ($contents as $file) {
+            if ($file['type'] == 'dir') continue;
+            $files[] = $file['basename'];
+        }
+
+        if (empty($files)) {
+            $this->info('No backups were found at this path.');
+            return;
+        }
+
+        $rows = [];
+        foreach ($contents as $file) {
+            if ($file['type'] == 'dir') continue;
+            $rows[] = [
+                $file['basename'],
+                key_exists('extension', $file) ? $file['extension'] : null,
+                $this->formatBytes($file['size']),
+                date('D j Y  H:i:s', $file['timestamp'])
+            ];
+        }
+        $this->info('Available database dumps:');
+        $this->table(['Name', 'Extension', 'Size', 'Created'], $rows);
+        $filename = $this->autocomplete("Which database dump do you want to restore?", $files);
+        $this->input->setOption('sourcePath', "{$path}/{$filename}");
+    }
+
+    /**
+     *
+     */
 
 
 
