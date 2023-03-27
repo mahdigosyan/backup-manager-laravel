@@ -66,4 +66,19 @@ class DbRestoreCommand extends Command {
     /**
      *
      */
+    public function fire() {
+        if ($this->isMissingArguments()) {
+            $this->displayMissingArguments();
+            $this->promptForMissingArgumentValues();
+            $this->validateArguments();
+        }
+
+        $this->info('Downloading and importing backup...');
+        $this->restore->run(
+            $this->option('source'),
+            $this->option('sourcePath'),
+            $this->option('database'),
+            $this->option('compression')
+        );
+
 
