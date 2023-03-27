@@ -183,6 +183,83 @@ class DbRestoreCommand extends Command {
     /**
      *
      */
+    private function askDatabase() {
+        $providers = $this->databases->getAvailableProviders();
+        $formatted = implode(', ', $providers);
+        $this->info("Available database connections: <comment>{$formatted}</comment>");
+        $database = $this->autocomplete("From which database connection you want to restore?", $providers);
+        $this->input->setOption('database', $database);
+    }
+
+    /**
+     *
+     */
+    private function askCompression() {
+        $types = ['null', 'gzip'];
+        $formatted = implode(', ', $types);
+        $this->info("Available compression types: <comment>{$formatted}</comment>");
+        $compression = $this->autocomplete('Which compression type you want to use?', $types);
+        $this->input->setOption('compression', $compression);
+    }
+
+    /**
+     * @return void
+     */
+    private function validateArguments() {
+        $root = $this->filesystems->getConfig($this->option('source'), 'root');
+        $this->info('Just to be sure...');
+        $this->info(sprintf('Do you want to restore the backup <comment>%s</comment> from <comment>%s</comment> to database <comment>%s</comment> and decompress it from <comment>%s</comment>?',
+            $root . $this->option('sourcePath'),
+            $this->option('source'),
+            $this->option('database'),
+            $this->option('compression')
+        ));
+        $this->line('');
+        $confirmation = $this->confirm('Are these correct? [Y/n]');
+        if ( ! $confirmation) {
+            $this->reaskArguments();
+        }
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return void
+     */
+    private function reaskArguments() {
+        $this->line('');
+        $this->info('Answers have been reset and re-asking questions.');
+        $this->line('');
+        $this->promptForMissingArgumentValues();
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions() {
+        return [
+            ['source', null, InputOption::VALUE_OPTIONAL, 'Source configuration name', null],
+            ['sourcePath', null, InputOption::VALUE_OPTIONAL, 'Source path from service', null],
+            ['database', null, InputOption::VALUE_OPTIONAL, 'Database configuration name', null],
+            ['compression', null, InputOption::VALUE_OPTIONAL, 'Compression type', null],
+        ];
+    }
+
+    /**
+     * @param $bytes
+     * @param int $precision
+     * @return string
+     */
+    private function formatBytes($bytes, $precision = 2) {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+}
 
 
 
