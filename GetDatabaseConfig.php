@@ -20,3 +20,14 @@ trait GetDatabaseConfig
             if ( ! in_array($connection['driver'], ['mysql', 'pgsql'])) {
                 return;
             }
+
+            if (isset($connection['port'])) {
+                $port = $connection['port'];
+            } else {
+                if ($connection['driver'] === 'mysql') {
+                    $port = '3306';
+                } elseif ($connection['driver'] === 'pgsql') {
+                    $port = '5432';
+                }
+            }
+            
