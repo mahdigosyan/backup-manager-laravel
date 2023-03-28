@@ -30,4 +30,19 @@ trait GetDatabaseConfig
                     $port = '5432';
                 }
             }
-            
+            return [
+                'type'     => $connection['driver'],
+                'host'     => $connection['host'],
+                'port'     => $port,
+                'user'     => $connection['username'],
+                'pass'     => $connection['password'],
+                'database' => $connection['database'],
+                'ignoreTables' => $connection['driver'] === 'mysql' && isset($connection['ignoreTables'])
+                    ? $connection['ignoreTables'] : null,
+                'extraParams' => config('backup-manager.command-extra-params'),
+            ];
+        }, $connections);
+        return new Config($mapped);
+    }
+}
+
