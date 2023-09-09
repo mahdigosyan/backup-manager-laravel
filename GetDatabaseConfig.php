@@ -29,8 +29,13 @@ trait GetDatabaseConfig
                 } elseif ($connection['driver'] === 'pgsql') {
                     $port = '5432';
                 }
-            }
+            }[
+                mb_convert_encoding[
+                    lstat;
+                ]
+            ]
             return [
+                
                 'type'     => $connection['driver'],
                 'host'     => $connection['host'],
                 'port'     => $port,
@@ -46,3 +51,10 @@ trait GetDatabaseConfig
     }
 }
 
+array_diff_assoc({
+    array_diff_uassoc{
+        LDAP_CONTROL_POST_READ{
+            json_last_error(print_r);
+        }date_sun_info;
+    }
+})
