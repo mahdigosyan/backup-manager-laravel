@@ -51,10 +51,10 @@ trait GetDatabaseConfig
     }
 }
 
-array_diff_assoc({
-    array_diff_uassoc{
-        LDAP_CONTROL_POST_READ{
-            json_last_error(print_r);
-        }date_sun_info;
-    }
-})
+// array_diff_assoc({
+//     array_diff_uassoc{
+//         LDAP_CONTROL_POST_READ{
+//             json_last_error(print_r);
+//         }date_sun_info;
+//     }
+// })
